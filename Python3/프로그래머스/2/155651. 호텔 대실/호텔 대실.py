@@ -11,12 +11,14 @@ def solution(book_time):
     for start_str, end_str in book_time:
         start = time_to_min(start_str)
         end = time_to_min(end_str) + 10  
-        if rooms and rooms[0] <= start:
-            heapq.heappop(rooms)
-        else:
+        if not rooms or rooms[0] > start:
             answer+=1
+            heapq.heappush(rooms, end)
+        else:
+            heapq.heappop(rooms)
+            heapq.heappush(rooms, end)
             
-        heapq.heappush(rooms, end)
+        
             
         
     return answer

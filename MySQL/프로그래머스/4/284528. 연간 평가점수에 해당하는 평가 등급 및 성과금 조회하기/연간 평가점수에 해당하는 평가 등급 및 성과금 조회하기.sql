@@ -1,20 +1,19 @@
-SELECT 
-    e.emp_no AS EMP_NO,
-    e.emp_name AS EMP_NAME,
-    CASE 
-        WHEN AVG(g.score) >= 96 THEN 'S'
-        WHEN AVG(g.score) >= 90 THEN 'A'
-        WHEN AVG(g.score) >= 80 THEN 'B'
-        ELSE 'C'
-    END AS GRADE,
-    CASE 
-        WHEN AVG(g.score) >= 96 THEN e.sal * 0.2
-        WHEN AVG(g.score) >= 90 THEN e.sal * 0.15
-        WHEN AVG(g.score) >= 80 THEN e.sal * 0.1
-        ELSE 0
-    END AS BONUS
-FROM HR_EMPLOYEES e
-JOIN HR_GRADE g ON e.emp_no = g.emp_no
-WHERE g.year = 2022
-GROUP BY e.emp_no, e.emp_name, e.sal
-ORDER BY e.emp_no;
+with bonus as(
+select e.emp_no, avg(g.score) as avg_score
+from hr_employees e join hr_grade g on e.emp_no = g.emp_no
+group by e.emp_no)
+
+select e.emp_no, e.emp_name,
+case
+when b.avg_score >= 96 then 'S'
+when b.avg_score >= 90 then 'A'
+when b.avg_score >= 80 then 'B'
+else 'C'
+end as grade,
+case
+when b.avg_score >= 96 then e.sal*0.2
+when b.avg_score >= 90 then e.sal*0.15
+when b.avg_score >= 80 then e.sal*0.1
+else 0
+end as bonus 
+from hr_employees e join bonus b on e.emp_no = b.emp_no

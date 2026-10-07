@@ -1,11 +1,8 @@
-select e.id,
+select id,
     case
-        when e.size_of_colony <= 100
-        then 'LOW'
-        when e.size_of_colony > 100 and e.size_of_colony <= 1000
-        then 'MEDIUM'
-        when e.size_of_colony > 1000
-        then 'HIGH'
-end as SIZE
-from ecoli_data as e
-order by e.id asc;
+        when size_of_colony<=100 then 'LOW'
+        when size_of_colony>100 and size_of_colony<=1000 then 'MEDIUM'
+        else 'HIGH'
+    end as size
+from ecoli_data
+order by id asc;

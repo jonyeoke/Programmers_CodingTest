@@ -1,15 +1,15 @@
 def solution(s):
     stk = []
-    
+
     for now in s:
-        if now == '(':
-            stk.append(now)
-        else:
+        if now == ')':
             if not stk:
                 return False
-            else:
-                stk.pop()
+            stk.pop()
+        else:
+            stk.append(now)
+
     if stk:
         return False
-    
+
     return True

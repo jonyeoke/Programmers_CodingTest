@@ -1,17 +1,15 @@
 from functools import cmp_to_key
 
-def compare(x, y):
-    if x + y > y + x:
-        return -1
-    elif x + y < y + x:
+def cmp(num1, num2):
+    if str(num1)+str(num2)<str(num2)+str(num1):
         return 1
-    else:
-        return 0
+    else : return -1
 
 def solution(numbers):
-    numbers = list(map(str, numbers))
-    answer = sorted(numbers, key=cmp_to_key(compare))
-    answer = "".join(answer)
-    if answer[0] == '0':
-        answer = '0'
-    return answer
+    answer = ''
+    
+    numbers=sorted(numbers, key=cmp_to_key(cmp))
+    
+    if numbers[0]==0: return '0'
+    
+    return ''.join(map(str,numbers))

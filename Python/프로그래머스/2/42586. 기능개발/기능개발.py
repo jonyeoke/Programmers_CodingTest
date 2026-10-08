@@ -1,19 +1,32 @@
+def get_remain_time(progress, speed):
+    now = progress
+    time = 0
+    
+    while now<100:
+        now+=speed
+        time+=1
+    return time
+
 def solution(progresses, speeds):   
     answer = []
-    left_days = []
-
-    for i in range(len(progresses)):
-        left_days.append((100 - progresses[i]) // speeds[i] + ((100 - progresses[i]) % speeds[i] > 0))
     
-    now = left_days[0]
-    count = 1
-    for i in range(1, len(left_days)):
-        if left_days[i] <= now:
-            count += 1
+    times = []
+    
+    for i, now in enumerate(progresses):
+        times.append(get_remain_time(now, speeds[i]))
+    
+    i = 1
+    nums = 1
+    now = times[0]
+    
+    while i < len(times):
+        if now<times[i]:
+            answer.append(nums)
+            now = times[i]
+            nums=1
         else:
-            now = left_days[i]
-            answer.append(count)
-            count = 1
+            nums+=1
+        i+=1
+    answer.append(nums)
     
-    answer.append(count)
     return answer

@@ -1,26 +1,23 @@
-count=0
-found=False
-
-def recursive(target, now):
-    global count, found
-    if now == target:
-        found = True
-        return
-
-    if len(now) >= 5:
-        return
-
-    aeiou = ['A', 'E', 'I', 'O', 'U']
-    
-    for char in aeiou:
-        if found:
-            return
+def dfs(count, now, moeum, target,found):
+    count+=1
+    if now==target:
+        return count, True
+    if not found:
+        if len(now)==5:
+            return count, found
+        for c in moeum:
+            if found: break
+            count,found = dfs(count, now+c, moeum, target, found)
+    return count, found
         
-        count += 1
-        recursive(target, now + char)
 
 def solution(word):
-    global count, found
-    recursive(word, '')
+    answer = 0
+    moeum=('A','E','I','O','U')
     
-    return count
+    count=0
+    for m in moeum:
+        answer, found = dfs(answer,m,moeum,word,False)
+        if found: return answer
+    
+    return answer

@@ -1,10 +1,8 @@
 def solution(participant, completion):
     answer = ''
-    
-    sp = sorted(participant)
-    sc = sorted(completion)
-    
-    for i,now in enumerate(sc):
-        if sp[i] != sc[i]:
-            return sp[i]
-    return sp[-1]
+    sorted_p = sorted(participant)
+    sorted_c = sorted(completion)
+    for i, now in enumerate(sorted_c):
+        if sorted_p[i] != now:
+            return sorted_p[i]
+    return sorted_p[-1]

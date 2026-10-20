@@ -1,4 +1,3 @@
-from collections import Counter
 def solution(nums):
     answer = 0
     n = set(nums)

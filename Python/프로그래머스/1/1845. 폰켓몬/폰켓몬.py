@@ -1,9 +1,6 @@
+from collections import Counter
 def solution(nums):
     answer = 0
-    
-    seen = set()
-    
-    for n in nums:
-        seen.add(n)
-    
-    return min(len(nums)/2, len(seen))
+    n = Counter(nums)
+    return min(len(n),(len(nums)/2))
+    return answer

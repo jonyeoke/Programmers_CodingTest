@@ -1,15 +1,13 @@
 def solution(prices):
     answer = [0]*len(prices)
     
-    stk=[]
-    
+    stk = []
     for i, now in enumerate(prices):
-        while stk and now < stk[-1][0]:
-            _, n = stk.pop()
-            answer[n] = i-n
+        while stk and stk[-1][0] > now:
+            popped, j = stk.pop()
+            answer[j] = i-j
         stk.append((now,i))
     while stk:
-        _,n=stk.pop()
-        answer[n]=len(prices)-n-1
-    
+        now, i = stk.pop()
+        answer[i] = len(prices)-i-1
     return answer

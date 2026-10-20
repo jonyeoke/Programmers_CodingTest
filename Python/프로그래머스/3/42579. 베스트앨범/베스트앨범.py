@@ -2,18 +2,20 @@ from collections import defaultdict
 
 def solution(genres, plays):
     answer = []
+    dicts = defaultdict(list)
     
-    counter = defaultdict(int)
-    best = defaultdict(list)
+    for i, now in enumerate(genres):
+        dicts[now].append((i,plays[i]))
+    sums = []
     
-    for i, (now_g, now_p) in enumerate(zip(genres,plays)):
-        counter[now_g] += now_p
-        best[now_g].append((now_p,i))
+    for now in dicts:
+        dicts[now] = sorted(dicts[now], key=lambda x: -x[1])
     
-    sorted_counter = sorted(counter.items(), key=lambda x:-x[1])
+    for now in dicts:
+        sums.append((now, sum(t[1] for t in dicts[now])))
+    sums = sorted(sums, key=lambda x: -x[1])
     
-    for g, c in sorted_counter:
-        sorted_best = sorted(best[g], key=lambda x: (-x[0], x[1]))
-        for play, idx in sorted_best[:2]:
-            answer.append(idx)
+    for now in sums:
+        for i in range(0, min(len(dicts[now[0]]),2)):
+            answer.append(dicts[now[0]][i][0])
     return answer

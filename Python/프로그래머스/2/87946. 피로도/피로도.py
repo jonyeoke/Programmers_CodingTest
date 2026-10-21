@@ -1,15 +1,18 @@
-
-
-def dfs(now, items,visited,count):
-    best = count
-    for i in range(len(items)):
-        if not visited[i] and now>=items[i][0]:
+def dfs(left, ways, visited, cnt, result):
+    moved = False
+    
+    for i, v in enumerate(ways):
+        if not visited[i] and left >= v[0]:
+            moved = True
             visited[i]=True
-            best=max(best,dfs(now-items[i][1],items,visited,count+1))
+            dfs(left-v[1],ways, visited, cnt+1,result)
             visited[i]=False
-    return best
+        if not moved:
+            result.append(cnt)
+    return
 
 def solution(k, dungeons):
     answer = -1
-    visited=[False]*len(dungeons)
-    return dfs(k,dungeons,visited,0)
+    result = []
+    dfs(k,dungeons,[False]*len(dungeons),0,result)
+    return max(result)

@@ -1,5 +1,6 @@
-select p.product_id, product_name, sum(o.amount*p.price) as total_sales
-from food_product p join food_order o on p.product_id = o.product_id
-where date_format(o.produce_date, '%Y-%m')='2022-05'
-group by p.product_id
-order by total_sales desc, p.product_id asc;
+-- 코드를 입력하세요
+SELECT P.PRODUCT_ID, P.PRODUCT_NAME, SUM(O.AMOUNT) * P.PRICE AS TOTAL_SALES
+FROM FOOD_PRODUCT P JOIN FOOD_ORDER O ON P.PRODUCT_ID = O.PRODUCT_ID
+WHERE DATE_FORMAT(O.PRODUCE_DATE,'%Y-%m')='2022-05'
+GROUP BY P.PRODUCT_ID
+ORDER BY TOTAL_SALES DESC, P.PRODUCT_ID ASC;

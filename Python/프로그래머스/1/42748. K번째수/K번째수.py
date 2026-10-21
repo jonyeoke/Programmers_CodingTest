@@ -1,7 +1,8 @@
 def solution(array, commands):
     answer = []
-    for now in commands:
-        i,j,k = now
-        sublist = sorted(array[i-1:j])
-        answer.append(sublist[k-1])
+    
+    for i,j,k in commands:
+        now = array[i-1:j]
+        now = sorted(now)
+        answer.append(now[k-1])
     return answer

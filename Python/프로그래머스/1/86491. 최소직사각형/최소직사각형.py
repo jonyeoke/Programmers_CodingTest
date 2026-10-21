@@ -1,10 +1,15 @@
 def solution(sizes):
     answer = 0
     
-    for now in sizes:
-        now.sort()
-        
-    max_row = max([x[0] for x in sizes])
-    max_col = max([x[1] for x in sizes])
-    answer = max_row*max_col
+    v = []
+    h = []
+    
+    for i, j in sizes:
+        if i<j:
+            v.append(j)
+            h.append(i)
+        else:
+            v.append(i)
+            h.append(j)
+    return max(v) * max(h)
     return answer

@@ -1,4 +1,8 @@
-select distinct d.id, d.email, d.first_name, d.last_name
-from skillcodes s join developers d on (s.code&d.skill_code)>0
-where s.category='Front End'
-order by d.id asc;
+-- 코드를 작성해주세요
+WITH SC AS (SELECT SUM(CODE) AS CODE
+           FROM SKILLCODES
+           WHERE CATEGORY = 'Front End')
+SELECT D.ID, D.EMAIL, D.FIRST_NAME, D.LAST_NAME
+FROM DEVELOPERS D, SC S
+WHERE (D.SKILL_CODE & S.CODE) > 0
+ORDER BY D.ID ASC;

@@ -1,9 +1,8 @@
-select i.id, n.fish_name, i.length
-from fish_info i join fish_name_info n on i.fish_type=n.fish_type
-where (i.fish_type, i.length) in (
-    select fish_type, max(length)
-    from fish_info
-    group by fish_type
-    order by length)
-group by i.fish_type
-order by i.id asc;
+-- 코드를 작성해주세요
+SELECT I.ID, N.FISH_NAME, MAX(I.LENGTH)
+FROM FISH_INFO I JOIN FISH_NAME_INFO N ON I.FISH_TYPE = N.FISH_TYPE
+WHERE (I.FISH_TYPE, I.LENGTH) IN (SELECT FISH_TYPE, MAX(LENGTH)
+                                       FROM FISH_INFO
+                                       GROUP BY FISH_TYPE)
+GROUP BY I.FISH_TYPE
+ORDER BY I.ID ASC;

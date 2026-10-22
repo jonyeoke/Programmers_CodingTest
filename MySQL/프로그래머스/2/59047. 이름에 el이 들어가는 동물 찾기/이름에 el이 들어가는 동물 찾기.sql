@@ -1,4 +1,5 @@
-select animal_id, name
-from animal_ins
-where name like '%el%' and animal_type='Dog'
-order by name asc, animal_id asc;
+-- 코드를 입력하세요
+SELECT ANIMAL_ID, NAME
+FROM ANIMAL_INS
+WHERE ANIMAL_TYPE = 'Dog' AND NAME LIKE '%EL%'
+ORDER BY NAME, ANIMAL_ID

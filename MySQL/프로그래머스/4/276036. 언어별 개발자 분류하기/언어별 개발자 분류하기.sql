@@ -1,17 +1,15 @@
-with skills as(
-select
-    sum(case when category='Front End' then code end) as fe_code,
-    sum(case when name='C#' then code end) as cs_code,
-    sum(case when name='Python' then code end) as py_code
-from skillcodes)
+WITH SKILLS AS (SELECT
+                    SUM(CASE WHEN CATEGORY = 'Front End' THEN CODE END) AS FE,
+                    MAX(CASE WHEN NAME = 'C#' THEN CODE END) AS CS,
+                    MAX(CASE WHEN NAME = 'Python' THEN CODE END) AS PY
+               FROM SKILLCODES)
 
-select
-    case
-        when (d.skill_code&s.fe_code) and (d.skill_code&s.py_code) then 'A'
-        when d.skill_code & s.cs_code then 'B'
-        when d.skill_code&s.fe_code then 'C'
-    end as grade,
-    id, email
-from developers d, skills s
+SELECT 
+    CASE
+        WHEN (D.SKILL_CODE & S.FE) AND (D.SKILL_CODE & S.PY) THEN 'A'
+        WHEN (D.SKILL_CODE & S.CS) THEN 'B'
+        WHEN (D.SKILL_CODE & S.FE) THEN 'C'
+    END AS GRADE, D.ID, D.EMAIL
+FROM DEVELOPERS D, SKILLS S
 having grade is not null
-order by grade asc, id asc;
+ORDER BY GRADE, D.ID

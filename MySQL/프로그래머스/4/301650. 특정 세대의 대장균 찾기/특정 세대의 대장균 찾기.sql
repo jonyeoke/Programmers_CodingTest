@@ -1,6 +1,5 @@
-select g2.id
-from ecoli_data p
-join ecoli_data g1 on p.id = g1.parent_id
-join ecoli_data g2 on g1.id = g2.parent_id
-where p.parent_id IS NULL
-order by g2.id asc;
+-- 코드를 작성해주세요
+SELECT G3.ID
+FROM ECOLI_DATA G1 JOIN ECOLI_DATA G2 ON G1.ID = G2.PARENT_ID JOIN ECOLI_DATA G3 ON G2.ID = G3.PARENT_ID
+WHERE G1.PARENT_ID IS NULL
+ORDER BY G3.ID ASC;

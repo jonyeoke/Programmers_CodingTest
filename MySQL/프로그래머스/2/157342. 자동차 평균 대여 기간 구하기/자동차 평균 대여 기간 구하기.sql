@@ -1,5 +1,6 @@
-select car_id, round(avg(datediff(end_date, start_date)),1)+1 as average_duration
-from CAR_RENTAL_COMPANY_RENTAL_HISTORY
-group by car_id
-having avg(datediff(end_date, start_date))+1>=7
-order by average_duration desc, car_id desc;
+SELECT CAR_ID, ROUND(AVG(DATEDIFF(END_DATE, START_DATE)+1),1) AS AVERAGE_DURATION
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+GROUP BY CAR_ID
+HAVING AVG(DATEDIFF(END_DATE, START_DATE)+1) >= 7
+ORDER BY AVERAGE_DURATION DESC, CAR_ID DESC;
+

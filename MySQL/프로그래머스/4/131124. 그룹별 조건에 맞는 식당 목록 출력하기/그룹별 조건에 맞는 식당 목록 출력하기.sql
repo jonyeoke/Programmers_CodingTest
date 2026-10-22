@@ -1,8 +1,9 @@
-select p.member_name, r.review_text, r.review_date
-from member_profile p join rest_review r on p.member_id = r.member_id 
-where p.member_id = (select p.member_id
-                  from member_profile p join rest_review r on p.member_id = r.member_id
-                  group by p.member_id
-                  order by count(p.member_id) desc
-                  limit 1)
-order by r.review_date asc, r.review_text asc;
+-- 코드를 입력하세요
+SELECT M.MEMBER_NAME, R.REVIEW_TEXT, R.REVIEW_DATE
+FROM MEMBER_PROFILE M JOIN REST_REVIEW R ON M.MEMBER_ID = R.MEMBER_ID
+WHERE M.MEMBER_ID = (SELECT M.MEMBER_ID
+                    FROM MEMBER_PROFILE M JOIN REST_REVIEW R ON M.MEMBER_ID = R.MEMBER_ID
+                    GROUP BY M.MEMBER_ID
+                    ORDER BY COUNT(R.REVIEW_ID) DESC
+                    LIMIT 1)
+ORDER BY R.REVIEW_DATE ASC, R.REVIEW_TEXT ASC;

@@ -1,22 +1,20 @@
-WITH RECURSIVE depth AS (
-    SELECT id, parent_id, 1 AS gen
-    FROM ecoli_data
-    WHERE parent_id IS NULL
-    
-    UNION ALL
+-- 코드를 작성해주세요
+WITH RECURSIVE COUNT_GEN AS(
 
-    SELECT c.id, c.parent_id, p.gen + 1
-    FROM ecoli_data c
-    JOIN depth p ON c.parent_id = p.id 
+SELECT ID, 1 AS GEN
+FROM ECOLI_DATA
+WHERE PARENT_ID IS NULL
+
+UNION ALL
+
+SELECT C.ID, P.GEN + 1
+FROM ECOLI_DATA C JOIN COUNT_GEN P ON C.PARENT_ID = P.ID
 )
-SELECT 
-    COUNT(id) AS COUNT, 
-    gen AS GENERATION
-FROM depth
-WHERE id NOT IN (
-    SELECT DISTINCT parent_id 
-    FROM ecoli_data 
-    WHERE parent_id IS NOT NULL
+
+SELECT COUNT(*) AS COUNT, GEN
+FROM COUNT_GEN
+WHERE ID NOT IN (
+    SELECT PARENT_ID FROM ECOLI_DATA WHERE PARENT_ID IS NOT NULL
 )
-GROUP BY gen
-ORDER BY GENERATION ASC;
+GROUP BY GEN
+ORDER BY GEN;

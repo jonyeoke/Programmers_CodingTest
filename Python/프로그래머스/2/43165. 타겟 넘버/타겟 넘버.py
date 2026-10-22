@@ -1,12 +1,15 @@
-def target_recursive(n_idx, n_num, numbers, target):
-    if n_idx == len(numbers):
-        if n_num == target:
+def dfs(now, step, numbers, target):
+    if step==len(numbers)+1:
+        if now == target:
             return 1
         else: return 0
     
-    
-    return target_recursive(n_idx+1, n_num+numbers[n_idx], numbers, target) + target_recursive(n_idx+1, n_num-numbers[n_idx], numbers, target)
+    minus = dfs(now-numbers[step-1], step+1, numbers, target)
+    plus = dfs(now+numbers[step-1], step+1,numbers, target)
+    return minus + plus
+
 def solution(numbers, target):
-    answer = target_recursive(0, 0, numbers, target)
+    answer = 0
     
+    return dfs(0,1,numbers,target)
     return answer

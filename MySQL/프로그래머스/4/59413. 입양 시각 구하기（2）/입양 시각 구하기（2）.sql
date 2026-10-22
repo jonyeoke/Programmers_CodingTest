@@ -1,14 +1,15 @@
-with recursive timer as (
-    select 0 as hour
+-- 코드를 입력하세요
+WITH RECURSIVE CLOCK AS (
+    SELECT 0 AS HOUR
     
-    union all
+    UNION ALL
     
-    select hour+1
-    from timer
-    where hour<23
+    SELECT HOUR+1
+    FROM CLOCK
+    WHERE HOUR < 23
 )
 
-select t.hour, count(animal_id)
-from timer t left outer join animal_outs o on t.hour = hour(o.datetime)
-group by t.hour
-order by t.hour asc;
+SELECT C.HOUR, COUNT(ANIMAL_ID)
+FROM CLOCK C LEFT JOIN ANIMAL_OUTS O ON C.HOUR = HOUR(O.DATETIME)
+GROUP BY C.HOUR
+ORDER BY C.HOUR ASC;

@@ -2,25 +2,29 @@ from collections import deque
 
 def solution(maps):
     answer = 0
-    n = len(maps)
-    m = len(maps[0])
+    q = deque()
     
-    visited = [[False]* m for _ in range(n)]
+    n = len(maps) # 행
+    m = len(maps[0]) # 열
+    # 시작점 0,0
+    target = (n-1, m-1) # 도착점 n-1, m-1
     
-    que = deque()
-    count = 1
-    que.append((0,0,count))
+    q.append((0,0,1))
     
-    dir = [(0,1),(1,0),(0,-1),(-1,0)]
-    visited[0][0]=True
-    while que:
-        tn,tm,count = que.popleft()
-        if tn==n-1 and tm==m-1: return count
-        for nn,nm in dir:
-            if nn+tn>=0 and nm+tm>=0 and nn+tn<n and nm+tm<m and not visited[nn+tn][nm+tm]:
-                if maps[nn+tn][nm+tm] != 0:
-                    visited[nn+tn][nm+tm]=True
-                    que.append((nn+tn,nm+tm,count+1))
+    dnxt = ((0,1),(0,-1),(1,0),(-1,0))
+    
+    while q:
+        nn, nm, cnt = q.popleft()
+        if nn == n-1 and nm == m-1:
+            return cnt
+        for dn,dm in dnxt:
+            nxtn = nn+dn
+            nxtm = nm+dm
+            
+            if nxtn>=0 and nxtn<n and nxtm>=0 and nxtm<m:
+                if maps[nxtn][nxtm] == 1:
+                    maps[nxtn][nxtm]=0
+                    q.append((nxtn, nxtm, cnt+1))
                     
     
     return -1

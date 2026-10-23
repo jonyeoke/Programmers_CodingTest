@@ -1,25 +1,24 @@
 def solution(answers):
-    answer = []
-    record = [0,0,0]
+    answer = [0,0,0]
+    s1 = [1,2,3,4,5]
+    s2 = [2,1,2,3,2,4,2,5]
+    s3 = [3,3,1,1,2,2,4,4,5,5]
     i=0
     j=0
     k=0
-    
-    p1 = [1,2,3,4,5]
-    p2=[2,1,2,3,2,4,2,5]
-    p3 = [3,3,1,1,2,2,4,4,5,5]
     for now in answers:
-        if p1[i]==now:
-            record[0]+=1
-        if p2[j]==now:
-            record[1]+=1
-        if p3[k]==now:
-            record[2]+=1
-        
-        i = (i+1)%len(p1)
-        j = (j+1)%len(p2)
-        k = (k+1)%len(p3)
-    for i, rcd in enumerate(record):
-        if rcd == max(record):
-            answer.append(i+1)
-    return answer
+        if now == s1[i]:
+            answer[0]+=1
+        if now == s2[j]:
+            answer[1]+=1
+        if now == s3[k]:
+            answer[2]+=1
+        i = (i+1)%len(s1)
+        j = (j+1)%len(s2)
+        k = (k+1)%len(s3)
+    maxone = max(v for v in answer)
+    res = []
+    for idx, now in enumerate(answer):
+        if now == maxone:
+            res.append(idx+1)
+    return res

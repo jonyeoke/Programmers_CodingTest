@@ -1,8 +1,10 @@
 def solution(array, commands):
     answer = []
-    
-    for i,j,k in commands:
-        now = array[i-1:j]
-        now = sorted(now)
-        answer.append(now[k-1])
+    for now in commands:
+        i = now[0]
+        j = now[1]
+        k = now[2]
+        new = array[i-1:j]
+        new = sorted(new)
+        answer.append(new[k-1])
     return answer

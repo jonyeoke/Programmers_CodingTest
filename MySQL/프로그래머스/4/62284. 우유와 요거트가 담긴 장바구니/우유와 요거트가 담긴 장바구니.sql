@@ -1,9 +1,6 @@
-select distinct c.cart_id
-from cart_products c join (select *
-                        from cart_products
-                        where name='milk') m on c.cart_id = m.cart_id
-                    join (select *
-                        from cart_products
-                        where name='yogurt') y on c.cart_id = y.cart_id
-group by c.id
-order by c.cart_id
+-- 코드를 입력하세요
+SELECT CART_ID
+FROM CART_PRODUCTS
+GROUP BY CART_ID
+HAVING SUM(NAME = 'Yogurt') >= 1 AND SUM(NAME = 'Milk') >= 1
+ORDER BY CART_ID ASC;

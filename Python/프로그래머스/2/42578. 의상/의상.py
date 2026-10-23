@@ -2,12 +2,13 @@ from collections import defaultdict
 
 def solution(clothes):
     answer = 1
-    dicts = defaultdict(list)
+    d = defaultdict(list)
     
-    for now in clothes:
-        dicts[now[1]].append(now[0])
-        
-    for now in dicts:
-        answer*=(len(dicts[now])+1)
-    return answer-1
+    for c, k in clothes:
+        d[k].append(c)
     
+    for now in d:
+        answer *= (len(d[now])+1)
+    
+    answer -= 1
+    return answer

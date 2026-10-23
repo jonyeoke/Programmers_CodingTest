@@ -1,9 +1,9 @@
 def solution(phone_book):
     answer = True
+    p = sorted(phone_book)
     
-    phone_book = sorted(phone_book)
+    for i in range(1, len(p)):
+        if p[i].startswith(p[i-1]): return False
     
-    for i in range(len(phone_book)-1):
-        if phone_book[i+1].startswith(phone_book[i]):
-            return False
+    
     return answer

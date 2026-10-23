@@ -5,14 +5,14 @@ def solution(s):
     
     for now in s:
         if not stk:
-            stk.append(now)
-            continue
-        if stk[-1]=='(':
-            if now ==')':
-                stk.pop()
-            else:
+            if now == '(': 
                 stk.append(now)
-    
+                continue
+            else: return False
+        if now == '(':
+            stk.append(now)
+        else:
+            if stk[-1] == '(':
+                stk.pop()
     if stk: return False
-
     return True

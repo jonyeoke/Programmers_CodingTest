@@ -1,18 +1,19 @@
-def dfs(left, ways, visited, cnt, result):
-    moved = False
-    
-    for i, v in enumerate(ways):
-        if not visited[i] and left >= v[0]:
-            moved = True
-            visited[i]=True
-            dfs(left-v[1],ways, visited, cnt+1,result)
-            visited[i]=False
-        if not moved:
-            result.append(cnt)
-    return
+from itertools import permutations
 
 def solution(k, dungeons):
     answer = -1
-    result = []
-    dfs(k,dungeons,[False]*len(dungeons),0,result)
-    return max(result)
+    
+    ways = list(permutations(dungeons))
+    
+    for now in ways:
+        left = k
+        record = 0
+        for n in now:
+            if left >= n[0]:
+                record+=1
+                left-=n[1]
+            else:
+                break
+        answer = max(answer,record)
+        
+    return answer

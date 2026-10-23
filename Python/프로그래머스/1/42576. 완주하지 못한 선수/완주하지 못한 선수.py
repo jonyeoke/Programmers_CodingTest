@@ -1,9 +1,9 @@
-from collections import Counter
-
 def solution(participant, completion):
-    p = Counter(participant)
-    c = Counter(completion)
+    answer = ''
+    p = sorted(participant)
+    c = sorted(completion)
     
-    
-    return list((p-c).keys())[0]
-    return answer
+    for i, nc in enumerate(c):
+        if nc != p[i]:
+            return p[i]
+    return p[-1]

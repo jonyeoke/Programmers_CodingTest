@@ -1,15 +1,13 @@
 def solution(sizes):
     answer = 0
     
-    v = []
-    h = []
+    s = []
     
-    for i, j in sizes:
-        if i<j:
-            v.append(j)
-            h.append(i)
+    for now in sizes:
+        if now[0] > now[1]:
+            s.append((now[0],now[1]))
         else:
-            v.append(i)
-            h.append(j)
-    return max(v) * max(h)
-    return answer
+            s.append((now[1],now[0]))
+    mh = max(v[0] for v in s)
+    mv = max(v[1] for v in s)
+    return mh*mv

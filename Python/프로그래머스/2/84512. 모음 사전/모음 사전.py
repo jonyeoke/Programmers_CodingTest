@@ -1,18 +1,18 @@
-def dfs(now, moeum, count, target):
-    if target == now:
+def dfs(now, count, target, moeum):
+    if now==target:
         return count, True
-    if len(now) == 5:
+    if len(now)==5:
         return count, False
-    for m in moeum:
-        count += 1
-        count, found = dfs(now + m, moeum, count, target)
+    for nxt in moeum:
+        count, found = dfs(now+nxt, count+1, target, moeum)
         if found:
             return count, True
+    
     return count, False
 
 def solution(word):
     answer = 0
     moeum = ['A','E','I','O','U']
-
-    answer, _ = dfs('', moeum, 0, word)
+    answer, found = dfs('',0,word,moeum)
+    if found: return answer
     return answer
